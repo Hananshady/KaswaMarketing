@@ -418,24 +418,24 @@ function generatePDF(formData, formType) {
        
        // Investor Information (right Column)
        doc.setFont("helvetica", "bold");
-       doc.text("Investor Information:", 95, y);
+       doc.text("Investor Information:", 97, y);
        y += 11;
        doc.setFont("helvetica", "normal");
-       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 95, y);
+       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 95, y);
+       doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Identity Card No: ${formData['cnic'] || 'N/A'}`, 95, y);
+       doc.text(`Identity Card No: ${formData['cnic'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || 'N/A'}`, 95, y);
+       doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 95, y);
+       doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 95, y, { maxWidth: 110 });
+       doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
-       doc.text(`Business Description (Private): ${formData['business-description'] || 'N/A'}`, 95, y, { maxWidth: 110 });
+       doc.text(`Business Description (Private): ${formData['business-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
-       doc.text(`Complete Address: ${formData['address'] || 'N/A'}`, 95, y, { maxWidth: 110 });
+       doc.text(`Complete Address: ${formData['address'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        
        // Set y position to continue after both columns
        y = twoColumnStartY + 45; // Adjust this value based on your actual content height
