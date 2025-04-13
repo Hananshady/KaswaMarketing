@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaswa Marketing</title>
+    <link rel="shortcut icon" href="Logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="developer-text">
+            Developer: Muzammil Hussain
+            <a href="mailto:muzzammilhussain26@gmail.com" class="mail-link">Gmail: muzzammilhussain26@gmail.com</a>
+        </div>
+
+        <div class="login-box">
+            <img src="Logo.jpg" class="logo" alt="Kaswa Logo">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <button onclick="toggleChangePassword()" class="change-password">Change Password</button>
+            
+            <div id="change-password-box" class="hidden">
+                <input type="password" id="current-password" placeholder="Current Password">
+                <input type="password" id="new-password" placeholder="New Password">
+                <input type="password" id="confirm-password" placeholder="Confirm Password">
+                <button onclick="updatePassword()">Update Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="dashboard hidden">
+        <div class="sidebar">
+            <button class="dashboard-btn" onclick="showDashboard()">Dashboard</button>
+            <h2>Forms</h2>
+            <ul>
+                <li onclick="showForm('agreement investment')">Agreement Investment</li>
+                <li onclick="showForm('investment')">Investment</li>
+                <li onclick="showForm('amount')">Amount</li>
+                <li onclick="showForm('agreement amount')">Agreement Amount</li>
+                <li onclick="showForm('Payment Receipt')">Payment Receipt</li>
+            </ul>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>Kaswa Head Office No:</strong><br>051-459-6140</p>
+                <p><strong>Kaswa Management Inquiry:</strong><br>0315-546-8312<br>0303-508-0266<br>0320-574-3150</p>
+                <p><strong>Main Complain Cell No:</strong><br>0305-394-7730</p>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="dashboard-header">
+                <img src="Logo1.png" alt="Kaswa Marketing Logo" class="dashboard-logo">
+                <h1>Welcome to Kaswa Marketing</h1>
+                <p>Kaswa Marketing is a business model based on a "Source of Income" system, where individuals can earn income by working with the company through various methods without needing large investments.
+                    The system mainly operates through three methods: selling digital products, partnership-based business, and investment opportunities.
+                    Its purpose is to provide financial freedom and part-time or freelance earning opportunities to ordinary people.</p>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn take-image-btn" onclick="takeImage()">Take Image</button>
+                <button class="action-btn take-finger-scan-btn" onclick="takeFingerScan()">Take Finger Scan</button>
+            </div>
+
+            <div id="form-container" class="hidden"></div>
+        </div>
+
+        <div class="dashboard-footer">
+            Mail: <a href="mailto:kaswamarketing@gmail.com">kaswamarketing@gmail.com</a> | Office number LG - 2, Gulshan e Anwar Plaza, Gulshan Anwar, Wah Cantt.
+        </div>
+    </div>
+
+ <!-- Webcam Modal -->
+<div id="webcam-modal" class="modal hidden">
+    <div class="modal-content">
+        <button id="close-modal" class="close-modal">close scanner</button>
+        <h3>Take Image</h3>
+        <video id="webcam-video" autoplay></video>
+        <button id="capture-btn">Capture</button>
+        <canvas id="webcam-canvas" class="hidden"></canvas>
+        
+        <div id="image-preview-container" class="hidden">
+            <div id="image-preview"></div>
+            <div class="preview-buttons">
+                <button id="done-btn">Done</button>
+                <button id="re-capture-btn">Re-Capture</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Fingerprint Scanner Modal -->
+    <div id="fingerprint-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeFingerprintModal()">&times;</span>
+            <button onclick="closeFingerprintModal()">close scanner</button>
+            <h3>Fingerprint Scan</h3>
+            <div id="fingerprint-scanner-placeholder">
+                <p>Place your finger on the scanner</p>
+            </div>
+            <button id="capture-fingerprint-btn">Capture Fingerprint</button>
+            
+            <div id="fingerprint-preview-container" class="hidden">
+                <div id="fingerprint-preview"></div>
+                <div class="preview-buttons">
+                    <button id="fingerprint-done-btn">Done</button>
+                    <button id="fingerprint-re-capture-btn">Re-Capture</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
