@@ -196,7 +196,7 @@ function showForm(formType) {
     } else if (formType === 'Payment Receipt') {
         formContent = `
             <div style="text-align: center; font-family: Arial, sans-serif;">
-                <h1 style="margin-bottom: 5px;">KASWA MARKETING AND BUSINESS DEVELOPERS</h1>
+                <h2 style="margin-bottom: 5px;">KASWA MARKETING AND BUSSINESS DEVELOPERS</h2>
                 <h2 style="margin-top: 5px; margin-bottom: 5px;">KASWA MOTORS AND PROPERTY</h2>
                 <p style="margin: 5px 0;">Office number LG - 2, Gulshan e Anwar Plaza, Gulshan Anwar, Wah Cantt.</p>
                 <p style="margin: 5px 0 20px 0;">051-459-6140</p>
@@ -421,15 +421,15 @@ function generatePDF(formData, formType) {
        doc.text("Investor Information:", 97, y);
        y += 11;
        doc.setFont("helvetica", "normal");
-       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
+       doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
        y += 8;
-         doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
+       doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Identity Card No: ${formData['cnic'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || 'N/A'}`, 90, y);
        y += 8;
-        doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
+        doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
@@ -612,7 +612,7 @@ function generatePDF(formData, formType) {
         
         doc.setFont("helvetica", "bold");
         doc.setFontSize(18);
-        doc.text("KASWA MARKETING AND BUSINESS DEVELOPERS", 105, y, { align: 'center' });
+        doc.text("KASWA MARKETING BUSSINESS DEVELOPERS", 88, y, { align: 'center' });
         y += 8;
         doc.setFontSize(14);
         doc.text("KASWA MOTORS AND PROPERTY", 105, y, { align: 'center' });
