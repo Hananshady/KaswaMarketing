@@ -85,6 +85,9 @@ function showForm(formType) {
             <div class="form-actions">
                 <button onclick="submitForm('agreement investment')">Submit</button>
             </div>
+            
+            <div class="form-image-placeholder" id="image-placeholder" style="height: 120px;">Image Placeholder</div>
+            <div class="form-fingerprint-placeholder" id="fingerprint-placeholder">Fingerprint Placeholder</div>
         `;
     } else if (formType === 'investment') {
         formContent = `
@@ -124,6 +127,9 @@ function showForm(formType) {
             <div class="form-actions">
                 <button onclick="submitForm('investment')">Submit</button>
             </div>
+            
+            <div class="form-image-placeholder" id="image-placeholder" style="height: 120px;">Image Placeholder</div>
+            <div class="form-fingerprint-placeholder" id="fingerprint-placeholder">Fingerprint Placeholder</div>
         `;
     } else if (formType === 'amount') {
         formContent = `
@@ -163,6 +169,9 @@ function showForm(formType) {
             <div class="form-actions">
                 <button onclick="submitForm('amount')">Submit</button>
             </div>
+            
+            <div class="form-image-placeholder" id="image-placeholder" style="height: 120px;">Image Placeholder</div>
+            <div class="form-fingerprint-placeholder" id="fingerprint-placeholder">Fingerprint Placeholder</div>
         `;
 
 
@@ -192,11 +201,14 @@ function showForm(formType) {
             <div class="form-actions">
                 <button onclick="submitForm('agreement amount')">Submit</button>
             </div>
+            
+            <div class="form-image-placeholder" id="image-placeholder" style="height: 120px;">Image Placeholder</div>
+            <div class="form-fingerprint-placeholder" id="fingerprint-placeholder">Fingerprint Placeholder</div>
         `;
     } else if (formType === 'Payment Receipt') {
         formContent = `
             <div style="text-align: center; font-family: Arial, sans-serif;">
-                <h2 style="margin-bottom: 5px;">KASWA MARKETING AND BUSSINESS DEVELOPERS</h2>
+                <h1 style="margin-bottom: 5px;">KASWA MARKETING NETWORK</h1>
                 <h2 style="margin-top: 5px; margin-bottom: 5px;">KASWA MOTORS AND PROPERTY</h2>
                 <p style="margin: 5px 0;">Office number LG - 2, Gulshan e Anwar Plaza, Gulshan Anwar, Wah Cantt.</p>
                 <p style="margin: 5px 0 20px 0;">051-459-6140</p>
@@ -228,12 +240,6 @@ function showForm(formType) {
             </div>
         `;
     }
-
-    // Add image and fingerprint placeholders
-    formContent += `
-        <div class="form-image-placeholder" id="image-placeholder">Image Placeholder</div>
-        <div class="form-fingerprint-placeholder" id="fingerprint-placeholder">Fingerprint Placeholder</div>
-    `;
     
     document.getElementById("form-container").innerHTML = formContent;
     document.getElementById("form-container").classList.remove("hidden");
@@ -253,16 +259,18 @@ function submitForm(formType) {
         formData[input.id] = input.value;
     });
 
-    // Add image data if available
-    const imagePlaceholder = document.getElementById("image-placeholder");
-    if (imagePlaceholder && imagePlaceholder.querySelector("img")) {
-        formData['clientImage'] = imagePlaceholder.querySelector("img").src;
-    }
+    // Add image data if available (except for Payment Receipt)
+    if (formType !== 'Payment Receipt') {
+        const imagePlaceholder = document.getElementById("image-placeholder");
+        if (imagePlaceholder && imagePlaceholder.querySelector("img")) {
+            formData['clientImage'] = imagePlaceholder.querySelector("img").src;
+        }
 
-    // Add fingerprint data if available
-    const fingerprintPlaceholder = document.getElementById("fingerprint-placeholder");
-    if (fingerprintPlaceholder && fingerprintPlaceholder.querySelector("img")) {
-        formData['clientFingerprint'] = fingerprintPlaceholder.querySelector("img").src;
+        // Add fingerprint data if available (except for Payment Receipt)
+        const fingerprintPlaceholder = document.getElementById("fingerprint-placeholder");
+        if (fingerprintPlaceholder && fingerprintPlaceholder.querySelector("img")) {
+            formData['clientFingerprint'] = fingerprintPlaceholder.querySelector("img").src;
+        }
     }
 
     console.log("Form Data:", formData);
@@ -377,7 +385,41 @@ function generatePDF(formData, formType) {
         
         y += 35; // Final space after signatures
      
-
+        // Add client photo (only for non-Payment Receipt forms)
+        if (formData['clientImage']) {
+            try {
+                doc.addImage(formData['clientImage'], 'PNG', pageWidth - 60, 45, 45, 45); // Reduced height
+            } catch (e) {
+                console.error("Error adding client image:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+        }
+        
+        // Add fingerprint (only for non-Payment Receipt forms)
+        if (formData['clientFingerprint']) {
+            try {
+                doc.addImage(formData['clientFingerprint'], 'PNG', pageWidth - 55, 230, 45, 50);
+            } catch (e) {
+                console.error("Error adding fingerprint:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+                doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+            doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+        }
         
     } else if (formType === 'investment') {
         doc.setFontSize(12);
@@ -418,18 +460,18 @@ function generatePDF(formData, formType) {
        
        // Investor Information (right Column)
        doc.setFont("helvetica", "bold");
-       doc.text("Investor Information:", 97, y);
+       doc.text("Investor Information:", 90, y);
        y += 11;
        doc.setFont("helvetica", "normal");
-       doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
+       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
+       doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Identity Card No: ${formData['cnic'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || 'N/A'}`, 90, y);
        y += 8;
-        doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
+       doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
@@ -474,6 +516,42 @@ function generatePDF(formData, formType) {
        doc.text(`Signature: ________________________`, 15, y);
        y += 10;
        doc.text(`Bank Account Details (JazzCash, U Paisa): ${formData['bank-account'] || 'N/A'}`, 15, y, { maxWidth: 180 });
+
+       // Add client photo (only for non-Payment Receipt forms)
+       if (formData['clientImage']) {
+           try {
+               doc.addImage(formData['clientImage'], 'PNG', pageWidth - 60, 45, 45, 45); // Reduced height
+           } catch (e) {
+               console.error("Error adding client image:", e);
+               doc.setFillColor(240, 240, 240);
+               doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+               doc.setFontSize(10);
+               doc.setTextColor(100, 100, 100);
+               doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+           }
+       } else {
+           doc.setFillColor(240, 240, 240);
+           doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+           doc.setFontSize(10);
+           doc.setTextColor(100, 100, 100);
+           doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+       }
+       
+       // Add fingerprint (only for non-Payment Receipt forms)
+       if (formData['clientFingerprint']) {
+           try {
+               doc.addImage(formData['clientFingerprint'], 'PNG', pageWidth - 55, 230, 45, 50);
+           } catch (e) {
+               console.error("Error adding fingerprint:", e);
+               doc.setFillColor(240, 240, 240);
+               doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+               doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+           }
+       } else {
+           doc.setFillColor(240, 240, 240);
+           doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+           doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+       }
 
     } else if (formType === 'amount') {
         doc.setFontSize(12);
@@ -554,6 +632,42 @@ function generatePDF(formData, formType) {
         y += 20;
         
         doc.text(`Bank Account Details: ${formData['bank-account'] || '__________________'}`, 10, y, { maxWidth: 180 });
+
+        // Add client photo (only for non-Payment Receipt forms)
+        if (formData['clientImage']) {
+            try {
+                doc.addImage(formData['clientImage'], 'PNG', pageWidth - 60, 45, 45, 45); // Reduced height
+            } catch (e) {
+                console.error("Error adding client image:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+        }
+        
+        // Add fingerprint (only for non-Payment Receipt forms)
+        if (formData['clientFingerprint']) {
+            try {
+                doc.addImage(formData['clientFingerprint'], 'PNG', pageWidth - 55, 230, 45, 50);
+            } catch (e) {
+                console.error("Error adding fingerprint:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+                doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+            doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+        }
     
     } else if (formType === 'agreement amount') {
         doc.setFontSize(12);
@@ -607,12 +721,48 @@ function generatePDF(formData, formType) {
         
         y += 35; // Final space after signatures
 
+        // Add client photo (only for non-Payment Receipt forms)
+        if (formData['clientImage']) {
+            try {
+                doc.addImage(formData['clientImage'], 'PNG', pageWidth - 60, 45, 45, 45); // Reduced height
+            } catch (e) {
+                console.error("Error adding client image:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 52, 45, 45, 45, 3, 3, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Client Photo", pageWidth - 32.5, 67, { align: 'center' });
+        }
+        
+        // Add fingerprint (only for non-Payment Receipt forms)
+        if (formData['clientFingerprint']) {
+            try {
+                doc.addImage(formData['clientFingerprint'], 'PNG', pageWidth - 55, 230, 45, 50);
+            } catch (e) {
+                console.error("Error adding fingerprint:", e);
+                doc.setFillColor(240, 240, 240);
+                doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+                doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+            }
+        } else {
+            doc.setFillColor(240, 240, 240);
+            doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
+            doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
+        }
+
     } else if (formType === 'Payment Receipt') {
         let y = 50;
         
         doc.setFont("helvetica", "bold");
         doc.setFontSize(18);
-        doc.text("KASWA MARKETING BUSSINESS DEVELOPERS", 88, y, { align: 'center' });
+        doc.text("KASWA MARKETING NETWORK", 105, y, { align: 'center' });
         y += 8;
         doc.setFontSize(14);
         doc.text("KASWA MOTORS AND PROPERTY", 105, y, { align: 'center' });
@@ -680,42 +830,6 @@ function generatePDF(formData, formType) {
         doc.rect(10, 10, 190, y + 10);
     }
 
-    // Add client photo placeholder
-    if (formData['clientImage']) {
-        try {
-            doc.addImage(formData['clientImage'], 'PNG', pageWidth - 60, 45, 45, 55);
-        } catch (e) {
-            console.error("Error adding client image:", e);
-            doc.setFillColor(240, 240, 240);
-            doc.roundedRect(pageWidth - 52, 45, 45, 50, 3, 3, 'F');
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text("Client Photo", pageWidth - 32.5, 72, { align: 'center' });
-        }
-    } else {
-        doc.setFillColor(240, 240, 240);
-        doc.roundedRect(pageWidth - 52, 45, 45, 50, 3, 3, 'F');
-        doc.setFontSize(10);
-        doc.setTextColor(100, 100, 100);
-        doc.text("Client Photo", pageWidth - 32.5, 72, { align: 'center' });
-    }
-    
-    // Add fingerprint placeholder
-    if (formData['clientFingerprint']) {
-        try {
-            doc.addImage(formData['clientFingerprint'], 'PNG', pageWidth - 55, 230, 45, 50);
-        } catch (e) {
-            console.error("Error adding fingerprint:", e);
-            doc.setFillColor(240, 240, 240);
-            doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
-            doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
-        }
-    } else {
-        doc.setFillColor(240, 240, 240);
-        doc.roundedRect(pageWidth - 55, 230, 45, 50, 3, 3, 'F');
-        doc.text("Fingerprint", pageWidth - 32.5, 250, { align: 'center' });
-    }
-    
     // Add footer
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
