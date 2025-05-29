@@ -463,7 +463,7 @@ function generatePDF(formData, formType) {
        doc.text("Investor Information:", 90, y);
        y += 11;
        doc.setFont("helvetica", "normal");
-       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
+       doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
        doc.text(`Personal No : ${formData['personal-number'] || 'N/A'}`, 90, y);
        y += 8;
@@ -473,7 +473,7 @@ function generatePDF(formData, formType) {
        y += 8;
        doc.text(`Name of Factory: ${formData['factory-name'] || 'N/A'}`, 90, y);
        y += 8;
-       doc.text(`Job Description: ${formData['job-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
+       doc.text(`Name of Investor : ${formData['investor-name'] || 'N/A'}`, 90, y);
        y += 8;
        doc.text(`Business Description (Private): ${formData['business-description'] || 'N/A'}`, 90, y, { maxWidth: 110 });
        y += 8;
@@ -515,7 +515,7 @@ function generatePDF(formData, formType) {
        y += 25;
        doc.text(`Signature: ________________________`, 15, y);
        y += 10;
-       doc.text(`Bank Account Details (JazzCash, U Paisa): ${formData['bank-account'] || 'N/A'}`, 15, y, { maxWidth: 180 });
+       doc.text(`Bank Account Details: ${formData['bank-account'] || 'N/A'}`, 15, y, { maxWidth: 180 });
 
        // Add client photo (only for non-Payment Receipt forms)
        if (formData['clientImage']) {
