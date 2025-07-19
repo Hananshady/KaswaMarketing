@@ -60,7 +60,7 @@ function showForm(formType) {
 
     if (formType === 'agreement investment') {
         formContent = `
-            <h2>Kaswa Marketing and Business Developers</h2>
+            <h2>Kaswa Marketing & Business Developers(Pvt.)Ltd.</h2>
             <h3>Monthly Investment Agreement</h3>
             <p>I <input type="text" id="your-name" placeholder="Your Name"> son/daughter/spouse of 
             <input type="text" id="guardian-name" placeholder="Guardian Name"> holder of National Identity Card No 
@@ -91,7 +91,7 @@ function showForm(formType) {
         `;
     } else if (formType === 'investment') {
         formContent = `
-            <h2>Kaswa Marketing & Business Developers</h2>
+            <h2>Kaswa Marketing & Business Developers(Pvt.)Ltd.</h2>
             <h3>Investment Application Form</h3>
 
             <p>Registration NO: <input type="text" id="registration-number" placeholder="Registration Number"></p>
@@ -133,7 +133,7 @@ function showForm(formType) {
         `;
     } else if (formType === 'amount') {
         formContent = `
-        <h2>Kaswa Marketing & Business Developers</h2>
+        <h2>Kaswa Marketing & Business Developers(Pvt.)Ltd.</h2>
             <h2>Amount Investment Form</h2>
             <p>Registration NO: <input type="text" id="registration-number" placeholder="Registration Number"></p>
             <p>Name of Plan: <input type="text" id="plan-name" placeholder="Plan Name"></p>
@@ -177,7 +177,7 @@ function showForm(formType) {
 
     } else if (formType === 'agreement amount') {
         formContent = `
-            <h2>Kaswa Marketing and Business Developers</h2>
+            <h2>Kaswa Marketing & Business Developers(Pvt.)Ltd.</h2>
             <h3>Lump Sum Investment Agreement</h3>
             <p>I <input type="text" id="your-name" placeholder="Your Name"> son/daughter/spouse of 
             <input type="text" id="guardian-name" placeholder="Guardian Name"> holder of National Identity Card No 
@@ -208,7 +208,7 @@ function showForm(formType) {
     } else if (formType === 'Payment Receipt') {
         formContent = `
             <div style="text-align: center; font-family: Arial, sans-serif;">
-                <h1 style="margin-bottom: 5px;">KASWA MARKETING NETWORK</h1>
+                <h1 style="margin-bottom: 5px;">KASWA MARKETING NETWORK(Pvt.)Ltd.</h1>
                 <h2 style="margin-top: 5px; margin-bottom: 5px;">KASWA MOTORS AND PROPERTY</h2>
                 <p style="margin: 5px 0;">Office number LG - 2, Gulshan e Anwar Plaza, Gulshan Anwar, Wah Cantt.</p>
                 <p style="margin: 5px 0 20px 0;">051-459-6140</p>
@@ -318,7 +318,7 @@ function generatePDF(formData, formType) {
         title = "Payment Receipt";
     }
     
-    doc.text("Kaswa Marketing and Business Developers", pageWidth/2, 22, { align: 'center' });
+    doc.text("Kaswa Marketing & Business Developers(Pvt.)Ltd.", pageWidth/2, 22, { align: 'center' });
     doc.text(title, pageWidth/2, 32, { align: 'center' });
     
     // Add divider line
@@ -762,7 +762,7 @@ function generatePDF(formData, formType) {
         
         doc.setFont("helvetica", "bold");
         doc.setFontSize(18);
-        doc.text("KASWA MARKETING NETWORK", 105, y, { align: 'center' });
+        doc.text("KASWA MARKETING NETWORK(Pvt.)Ltd.", 105, y, { align: 'center' });
         y += 8;
         doc.setFontSize(14);
         doc.text("KASWA MOTORS AND PROPERTY", 105, y, { align: 'center' });
