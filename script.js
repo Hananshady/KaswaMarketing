@@ -141,14 +141,13 @@ function showForm(formType) {
             <p>Amount: <input type="text" id="amount" placeholder="Amount"></p>
             <p>Name of Investor: <input type="text" id="investor-name" placeholder="Investor Name"></p>
             <p>Personal No: <input type="text" id="personal-number" placeholder="Personal Number"></p>
-            <p>Heirs Name: <input type="text" id="heir-name" placeholder="Heir Name"></p>
             <p>Identity Card No: <input type="text" id="cnic" placeholder="CNIC"></p>
             <p>Parenthood/Marriage: <input type="text" id="parent-spouse-name" placeholder="Parent/Spouse Name"></p>
             <p>Name of Factory: <input type="text" id="factory-name" placeholder="Factory Name"></p>
             <p>Job Description: <input type="text" id="job-description" placeholder="Job Description"></p>
             <p>Business Description: <input type="text" id="business-description" placeholder="Business Description"></p>
             <p>Complete Address: <input type="text" id="address" placeholder="Address"></p>
-            
+             <p>Heirs Name: <input type="text" id="heir-name" placeholder="Heir Name"></p>
 
             <h4>Terms & Conditions</h4>
             <ul>
@@ -1180,4 +1179,5 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
