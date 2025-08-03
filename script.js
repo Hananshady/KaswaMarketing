@@ -573,7 +573,7 @@ function generatePDF(formData, formType) {
         
    // Name of Investor and Heirs Name side by side
 doc.text(`Name of Investor: ${formData['investor-name'] || '__________________'}`, 15, y);
-doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 90, y);
+doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 95, y);
 y += 9.2;
 
 // Personal No and Identity Card No side by side (with Heirs Name removed from here)
@@ -1179,6 +1179,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
