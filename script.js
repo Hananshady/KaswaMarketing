@@ -576,7 +576,7 @@ function generatePDF(formData, formType) {
         
        // Personal No, Heirs Name, and Identity Card No arranged as requested
 doc.text(`Personal No: ${formData['personal-number'] || '__________________'}`, 15, y);
-doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 60, y); // Adjusted position
+doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 55, y); // Adjusted position
 doc.text(`Identity Card No: ${formData['cnic'] || '__________________'}`, 120, y); // Adjusted position
 y += 9.2;
 
@@ -1178,6 +1178,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
