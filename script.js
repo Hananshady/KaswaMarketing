@@ -574,26 +574,25 @@ function generatePDF(formData, formType) {
         doc.text(`Name of Investor: ${formData['investor-name'] || '__________________'}`, 15, y);
         y += 9.2;
         
-        // Personal No and Identity Card No side by side
-        doc.text(`Personal No: ${formData['personal-number'] || '__________________'}`, 15, y);
-        doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 90, y);
-        doc.text(`Identity Card No: ${formData['cnic'] || '__________________'}`, 100, y);
-        y += 9.2;
-        
-        // Parenthood/Marriage and Name of Factory side by side
-        doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || '__________________'}`, 15, y);
-        doc.text(`Name of Factory: ${formData['factory-name'] || '__________________'}`, 100, y);
-        y += 9.2;
-        
-        // Job Description and Business Description side by side
-        doc.text(`Job Description: ${formData['job-description'] || '__________________'}`, 15, y);
-        doc.text(`Business Description: ${formData['business-description'] || '__________________'}`, 100, y);
-        y += 9.2;
-        
-        // Complete Address and Heirs Name side by side
-        doc.text(`Complete Address: ${formData['address'] || '__________________'}`, 15, y);
-        
-        y += 14.5;
+       // Personal No, Heirs Name, and Identity Card No arranged as requested
+doc.text(`Personal No: ${formData['personal-number'] || '__________________'}`, 15, y);
+doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 60, y); // Adjusted position
+doc.text(`Identity Card No: ${formData['cnic'] || '__________________'}`, 120, y); // Adjusted position
+y += 9.2;
+
+// Parenthood/Marriage and Name of Factory side by side
+doc.text(`Parenthood/Marriage: ${formData['parent-spouse-name'] || '__________________'}`, 15, y);
+doc.text(`Name of Factory: ${formData['factory-name'] || '__________________'}`, 100, y);
+y += 9.2;
+
+// Job Description and Business Description side by side
+doc.text(`Job Description: ${formData['job-description'] || '__________________'}`, 15, y);
+doc.text(`Business Description: ${formData['business-description'] || '__________________'}`, 100, y);
+y += 9.2;
+
+// Complete Address (removed duplicate Heirs Name)
+doc.text(`Complete Address: ${formData['address'] || '__________________'}`, 15, y);
+y += 14.5;
         
         // Terms & Conditions
         doc.setFont("helvetica", "bold");
@@ -1179,5 +1178,6 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
