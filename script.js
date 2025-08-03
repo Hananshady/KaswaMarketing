@@ -571,13 +571,14 @@ function generatePDF(formData, formType) {
         doc.text(`Amount: ${formData['amount'] || '__________________'}`, 15, y);
         y += 9.2;
         
-        doc.text(`Name of Investor: ${formData['investor-name'] || '__________________'}`, 15, y);
-        y += 9.2;
-        
-       // Personal No, Heirs Name, and Identity Card No arranged as requested
+   // Name of Investor and Heirs Name side by side
+doc.text(`Name of Investor: ${formData['investor-name'] || '__________________'}`, 15, y);
+doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 90, y);
+y += 9.2;
+
+// Personal No and Identity Card No side by side (with Heirs Name removed from here)
 doc.text(`Personal No: ${formData['personal-number'] || '__________________'}`, 15, y);
-doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 55, y); // Adjusted position
-doc.text(`Identity Card No: ${formData['cnic'] || '__________________'}`, 120, y); // Adjusted position
+doc.text(`Identity Card No: ${formData['cnic'] || '__________________'}`, 100, y);
 y += 9.2;
 
 // Parenthood/Marriage and Name of Factory side by side
@@ -1178,6 +1179,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
