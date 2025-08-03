@@ -573,7 +573,7 @@ function generatePDF(formData, formType) {
         
    // Name of Investor and Heirs Name side by side
 doc.text(`Name of Investor: ${formData['investor-name'] || '__________________'}`, 15, y);
-doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 95, y);
+doc.text(`Heirs Name: ${formData['heir-name'] || '__________________'}`, 96, y);
 y += 9.2;
 
 // Personal No and Identity Card No side by side (with Heirs Name removed from here)
@@ -592,7 +592,7 @@ doc.text(`Business Description: ${formData['business-description'] || '_________
 y += 9.2;
 
 // Complete Address (removed duplicate Heirs Name)
-doc.text(`Complete Address: ${formData['address'] || '__________________'}`, 15, y);
+doc.text(`Complete Address: ${formData['address'] || '_____________________________________________'}`, 15, y);
 y += 14.5;
         
         // Terms & Conditions
@@ -1179,6 +1179,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
