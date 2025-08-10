@@ -500,11 +500,11 @@ function generatePDF(formData, formType) {
        doc.text("Declaration:", 15, y);
        y += 10;
        doc.setFont("helvetica", "normal");
-       doc.text("I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company,", 15, y, { maxWidth: 180 });
+       doc.text("I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company,and I agree to be bound by them.I further undertake to comply", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text("and I agree to be bound by them. I further undertake to comply with our agreement in its entirety and to cooperate with the company in all related matters. ", 15, y, { maxWidth: 180 });
+       doc.text("with our agreement in its entirety and to cooperate with the company in all related matters.I also grant my full consent for my investment to be utilized solely for legitimate business purposes.", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text(" I also grant my full consent for my investment to be utilized solely for legitimate business purposes.", 15, y, { maxWidth: 180 });
+       doc.text(" ", 15, y, { maxWidth: 180 });
        y += 15;
        
        
@@ -1177,6 +1177,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
