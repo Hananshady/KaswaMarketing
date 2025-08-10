@@ -500,11 +500,13 @@ function generatePDF(formData, formType) {
        doc.text("Declaration:", 15, y);
        y += 10;
        doc.setFont("helvetica", "normal");
-       doc.text("I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company,and I agree to be bound by them.I further undertake to comply", 15, y, { maxWidth: 180 });
+       doc.text("I hereby declare that I have thoroughly read and fully understood all terms and conditions set ", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text("with our agreement in its entirety and to cooperate with the company in all related matters.I also grant my full consent for my investment to be utilized solely for legitimate business purposes.", 15, y, { maxWidth: 180 });
+       doc.text("forth by the company,and I agree to be bound by them.I further undertake to company with ", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text(" ", 15, y, { maxWidth: 180 });
+       doc.text("our agreement in its entirety and to cooperate with the company in all related matters.I also ", 15, y, { maxWidth: 180 });
+       y += 7;
+       doc.text("grant my full consent for my investment to be utilized solely for legitimate business purposes. ", 15, y, { maxWidth: 180 });
        y += 15;
        
        
