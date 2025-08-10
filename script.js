@@ -118,7 +118,7 @@ function showForm(formType) {
             </ul>
 
             <h4>Declaration</h4>
-            <p>I confirm that I have carefully read and understood all the terms and conditions mentioned above. I will strictly follow the company's policies and procedures. In case of any legal issues, I will be personally responsible, and the company will not be held accountable in any way. I also give permission for my investment to be used only for business purposes, where there may be both profit and loss.</p>
+            <p>I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company, and I agree to be bound by them. I further undertake to comply with our agreement in its entirety and to cooperate with the company in all related matters. I also grant my full consent for my investment to be utilized solely for legitimate business purposes.</p>
 
             <p>Mobile Number: <input type="text" id="mobile-number" placeholder="Mobile Number"></p>
             <p>Signature: <input type="text" id="signature" placeholder="Signature"></p>
@@ -159,8 +159,9 @@ function showForm(formType) {
              </ul>
 
             <h4>Declaration</h4>
-            <p>I confirm that I have carefully read and understood all the terms and conditions mentioned above. 
-            I will strictly follow the company's policies and procedures. In case of any legal issues, I will be personally responsible, and the company will not be held accountable in any way.I also give permission for my investment to be used only for business purposes, where there may be both profit and loss.</p>
+            <p>I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company,
+            and I agree to be bound by them. I further undertake to comply with our agreement in its entirety and to cooperate with the company in all related matters. 
+            I also grant my full consent for my investment to be utilized solely for legitimate business purposes.</p>
 
             <p>Mobile Number: <input type="text" id="mobile-number" placeholder="Mobile Number"></p>
             <p>Signature: <input type="text" id="signature" placeholder="Signature"></p>
@@ -499,16 +500,13 @@ function generatePDF(formData, formType) {
        doc.text("Declaration:", 15, y);
        y += 10;
        doc.setFont("helvetica", "normal");
-       doc.text("I confirm that I have carefully read and understood all the terms and conditions.", 15, y, { maxWidth: 180 });
+       doc.text("I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company,", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text("PwM strictly follow the company's policies and procedures. In case of any legal issues, ", 15, y, { maxWidth: 180 });
+       doc.text("and I agree to be bound by them. I further undertake to comply with our agreement in its entirety and to cooperate with the company in all related matters. ", 15, y, { maxWidth: 180 });
        y += 7;
-       doc.text("I will be responsible for this process. Kaswa Monthly responsibilities and the company ", 15, y, { maxWidth: 180 });
-       y += 7;
-       doc.text("will not be held accountable in any way. I also give permission for my investment to ", 15, y, { maxWidth: 180 });
-       y += 7;
-       doc.text("be used only for business purposes, where there are no other matters.", 15, y, { maxWidth: 180 });
+       doc.text(" I also grant my full consent for my investment to be utilized solely for legitimate business purposes.", 15, y, { maxWidth: 180 });
        y += 15;
+       
        
        // Signature and contact
        doc.text(`Mobile Number: ${formData['mobile-number'] || 'N/A'}`, 15, y);
@@ -622,7 +620,7 @@ y += 14.5;
         y += 7;
         doc.setFont("helvetica", "normal");
         
-        const declaration = "I confirm that I have carefully read and understood all the terms and conditions mentioned above. I will strictly follow the company's policies and procedures. In case of any legal issues, I will be personally responsible, and the company will not be held accountable in any way. I also give permission for my investment to be used only for business purposes, where there may be both profit and loss.";
+        const declaration = "I hereby declare that I have thoroughly read and fully understood all terms and conditions set forth by the company, and I agree to be bound by them. I further undertake to comply with our agreement in its entirety and to cooperate with the company in all related matters. I also grant my full consent for my investment to be utilized solely for legitimate business purposes.";
         
         doc.text(declaration, 15, y, { maxWidth: 180 });
         y += 45;
@@ -1179,6 +1177,7 @@ closeFingerprintModalBtn.addEventListener("click", closeFingerprintModal);
 document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(fingerprintFileInput);
 });
+
 
 
 
